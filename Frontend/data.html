@@ -1,0 +1,30 @@
+<script>
+    function doPost(e) {
+    const sheetUrl = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1eK3D8G5ph1OQkZIA5xpKoxT7th4cMjzxaTPVe4liLic/edit?gid=0#gid=0");
+  
+    const sheet = sheetUrl.getSheetByName("Wedding-Users");
+    if (!sheet) {
+      return ContentService.createTextOutput("Error: Sheet not found!");
+    }
+  
+    let data = e.parameter;
+    sheet.appendRow([data.Name, data.Email, data.Phone, data.Address]);
+  
+    return ContentService.createTextOutput("Added successfully!");
+  }
+  doPost();
+  function showWeddingUsers() {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("WeddingUsers");
+    if (!sheet) {
+      Logger.log("Sheet not found!");
+      return;
+    }
+  
+    var data = sheet.getDataRange().getValues(); // تمام ڈیٹا لوڈ کریں
+    Logger.log(data); // Execution log میں ڈیٹا دکھائے گا
+  
+    var formattedData = data.map(row => row.join(" | ")).join("\n");
+    Browser.msgBox("Wedding Users Data:\n\n" + formattedData);
+  }
+showWeddingUsers();
+</script>

@@ -1,0 +1,54 @@
+<!-- <script>
+    async function sendDataToGoogleSheet(rejectInfo) {
+      try {
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjMFZ08WoBYk2A6XeyuA6oggTPIg0QE187dfVPyhIu2tGNZ-oy4zZcwviN_t_vnL4t/exec";
+  
+        let response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors", // 🔥 Fix CORS error
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams(rejectInfo).toString(),
+        });
+  
+        alert("✅ Data successfully saved to Google Sheets!");
+      } catch (error) {
+        alert("❌ Error saving data to Google Sheets!");
+        console.error("Google Sheets Error:", error);
+      }
+    }
+  
+    // Example Data
+    sendDataToGoogleSheet({ Name: "Umar", Email: "umar@example.com", Phone: "123456789", Address: "Pakistan" });
+  </script>
+   -->
+
+   <script>
+    async function sendDataToGoogleSheet(rejectInfo) {
+      try {
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUBJ2kWhY_UdrJTyOiKjhWhlcmOR-4UFLXBOCEPsEDTRUsza8lNRSpWu8E0QzXZFC4/exec';
+  
+        let response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "cors", // CORS کو enable کرنے کے لیے
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams(rejectInfo).toString(),
+        });
+  
+        let text = await response.text();
+        alert("Data Successfully Saved to Google Sheet!");
+        console.log("Google Script Response:", text); // Debugging Response
+  
+      } catch (error) {
+        alert("Error Sending Data!");
+        console.error("Google Sheets Error:", error);
+      }
+    }
+  
+    // Function کو call کریں  
+    sendDataToGoogleSheet({ Name: "Umar", Email: "umar@example.com", Phone: "123456789", Address: "Pakistan" });
+  </script>
+  
